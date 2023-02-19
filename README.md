@@ -74,7 +74,7 @@ Cloud Paks and the individual solutions they contain (IBM MQ for example) are de
 
     Reach out to your OpenShift administrator if you do not have these credentials.
 
-4. Under the administrator perspective, navigate to Operators -> OperatorHub. In the search box, enter `CP4I`.
+4. **Under the administrator perspective, navigate to Operators -> OperatorHub. In the search box, enter `CP4I`.**
 
     ![cp4i-operatorhub](images/cp4i-operatorhub.png)
 
@@ -84,7 +84,7 @@ Cloud Paks and the individual solutions they contain (IBM MQ for example) are de
 
     With CustomResourceDefinitions defined in the OCP cluster, you then can use them by creating a **CustomResource (CR)** - an instance of the CRD. With the MQ example in this lab, there is an instance deployed named `quickstart-cp4i`, which is a CRD built from the QueueManager CRD. The difference seems pedantic, but it is non-trivial. The difference between a CRD vs. a CR is similar to that of a Container Image vs. a Container.
 
-5. Navigate to Operators -> Installed Operators, and navigate to the `CP4I` project.
+5. **Navigate to Operators -> Installed Operators, and navigate to the `CP4I` project.**
 
     ![cp4i-installedoperators](images/cp4i-installedoperators.png)
 
@@ -92,27 +92,27 @@ Cloud Paks and the individual solutions they contain (IBM MQ for example) are de
 
     On this screen you can also see the `Provided APIs`, or CRDs, that were installed by the operator. For example, the QueueManager for the IBM MQ operator.
 
-6. Click the link for the IBM MQ operator.
+6. **Click the link for the IBM MQ operator.**
 
     On this page, you see details about the operator, how to use it, its requirements, and more. This is essentially the operator's README file.
 
-7. Click the Queue Manager tab.
+7. **Click the Queue Manager tab.**
 
     Now you see the list of Queue Manager CRs. In this tutorial cluster, there is only the single QueueManager installed, named `quickstart-cp4i`.
 
-8. Click the link for the `quickstart-cp4i` QueueManager.
+8. **Click the link for the `quickstart-cp4i` QueueManager.**
 
     Now you see information specific to the Queue Manager we will be using in this lab. Scrolling down this page, you will find options to adjust TLS, storage, resource constraint, and observability settings. You cannot edit these values as a read-only member of the `CP4I` project, but an administrator or developer with proper credentials could do so.
 
     ![qm-cr](images/qm-cr.png)
 
-9. Click the link for the Admin UI, change the login provider to OpenShift authentication, and log in with the same credentials you used to log into OpenShift.
+9. **Click the link for the Admin UI, change the login provider to OpenShift authentication, and log in with the same credentials you used to log into OpenShift.**
 
     ![mq-console](images/mq-console.png)
 
     This is the homepage for the IBM MQ console. From here, you can manage Queue Managers, queues, and generate connection files that can be used to integrate applications with the CP4I queues.
 
-10. Click the tile for `Manage QUICKSTART`.
+10. **Click the tile for `Manage QUICKSTART`.**
 
     ![queue-manager](images/queue-manager.png)
 
@@ -120,31 +120,31 @@ Cloud Paks and the individual solutions they contain (IBM MQ for example) are de
 
     On the Queues tab, you should see a queue named `app1`. This is a local queue that we will be putting a message on later. 
 
-11. Click the Applications tab -> App channels.
+11. **Click the Applications tab -> App channels**.
 
     ![app-channels](images/app-channels.png)
 
     The Application channel also called `QUICKSTART` should be running. This is the MQ channel we will use to put a message onto the local queue.
 
-12. Explore the Queue Manager further by navigating around the MQ console. You are able to view the configuration and security settings, build a sample application that connects to the queue, or generate connection files that can be used in your own applications.
+12. **Explore the Queue Manager further by navigating around the MQ console**. You are able to view the configuration and security settings, build a sample application that connects to the queue, or generate connection files that can be used in your own applications.
 
-13. When you're ready to move on, keep the MQ console open, but open a second browser tab and navigate to the OpenShift console.
+13. When you're ready to move on, **keep the MQ console open, but open a second browser tab and navigate to the OpenShift console.**
 
-14. In OpenShift, navigate to Workloads -> Pods and check that you're in the `CP4I` project. Search for `quickstart` in the filter bar.
+14. In OpenShift, **navigate to Workloads -> Pods and check that you're in the `CP4I` project. Search for `quickstart` in the filter bar.**
 
     ![mq-pod](images/mq-pod.png)
 
-15. Click the link for the `quickstart-cp4i-ibm-mq-0` pod.
+15. **Click the link for the `quickstart-cp4i-ibm-mq-0` pod.**
 
     Here you can look at the details for the Kubernetes pod where the QUICKSTART queue manager is running. If there were multiple queue managers deployed in this CP4I instance, they would be deployed as separate pods.
 
-16. Look through the pod details, metrics, YAML, logs, and events as you wish.
+16. **Look through the pod details, metrics, YAML, logs, and events as you wish.**
 
-17. Select the Terminal tab.
+17. **Select the Terminal tab.**
 
     You're now connected to the pod's shell where you can interact with containerized applications like you would if it were in any other environment. The pod shell is accessible both in the web terminal as you see right now and through the command line with the `oc rsh` command.
 
-18. In the pod terminal, run the following command to display the MQ version.
+18. In the pod terminal, **run the following command to display the MQ version.**
 
     ```text
     dspmqver
@@ -171,7 +171,7 @@ Cloud Paks and the individual solutions they contain (IBM MQ for example) are de
     LicenseType: Production
     ```
 
-19. Look at the running queues via the terminal.
+19. **Look at the running queues via the terminal.**
 
     ```text
     dspmq
@@ -187,13 +187,13 @@ Cloud Paks and the individual solutions they contain (IBM MQ for example) are de
 
     Next you'll put a test message onto the `app1` queue.
 
-20. Set the `MQSERVER` variable which will be used in the following command.
+20. **Set the `MQSERVER` variable which will be used in the following command.**
 
     ```text
     export MQSERVER='QUICKSTART/TCP/quickstart-cp4i-ibm-mq(1414)'
     ```
 
-21. Use the `amqsputc` application to put a message onto the `app1` queue via the `QUICKSTART` channel.
+21. **Use the `amqsputc` application to put a message onto the `app1` queue via the `QUICKSTART` channel.**
 
     ```text
     /opt/mqm/samp/bin/amqsputc app1 QUICKSTART
@@ -201,7 +201,7 @@ Cloud Paks and the individual solutions they contain (IBM MQ for example) are de
 
     You will now have a prompt waiting for you to enter a message.
 
-22. Type out a message to put on the queue, such as `Hello from userNN`, where `NN` is your user number.
+22. **Type out a message to put on the queue, such as `Hello from userNN`, where `NN` is your user number.**
 
     Sample output:
     ```text
@@ -211,9 +211,9 @@ Cloud Paks and the individual solutions they contain (IBM MQ for example) are de
     Hello from userNN!
     ```
 
-23. Break out of the prompt with `ctrl+c`.
+23. **Break out of the prompt with `ctrl+c`**.
 
-24. Navigate to the `app1` local queue in the Cloud Pak for Integration console.
+24. **Navigate to the `app1` local queue in the Cloud Pak for Integration console**.
 
     ![app1-message](images/app1-message.png)
 
